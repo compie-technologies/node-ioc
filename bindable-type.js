@@ -1,3 +1,5 @@
+const Util = require('./util');
+
 const InitializationType = Object.freeze({
     VALUE:   Symbol("value"),
     VOLATILE:  Symbol("volatile"),
@@ -13,18 +15,23 @@ class BindableType {
     }
 
     to(constructor) {
+        Util.validateConstructor(constructor);
         this.constructor = constructor;
         this.initializationType = InitializationType.VOLATILE;
         this.container._bindType(this);
     }
 
     toSingleton(constructor) {
+        Util.validateConstructor(constructor);
         this.constructor = constructor;
         this.initializationType = InitializationType.SINGLETON;
         this.container._bindType(this);
     }
 
     toConstantValue(constantValue) {
+        if(!constantValue){
+            throw new Error('constantValue cannot be undefined!')
+        }
         this.constantValue = constantValue;
         this.initializationType = InitializationType.VALUE;
         this.container._bindType(this);
@@ -43,8 +50,7 @@ class BindableType {
             case InitializationType.VALUE:
                 return this.constantValue;
             default:
-
-                break;
+                throw new Error('no matching initialization type found!')
         }
     }
 }

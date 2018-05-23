@@ -2,7 +2,6 @@ class Context {
 
     constructor(name) {
         this.contextName = name || 'globalContext';
-
     }
 
     _getValueMap() {

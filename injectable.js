@@ -7,5 +7,4 @@ class Injectable {
 
 }
 
-
 module.exports = Injectable;

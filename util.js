@@ -1,5 +1,7 @@
 const Type = require('./type');
 
+const handler={construct(){return handler}}
+
 class Util {
 
     static validateType(name){
@@ -8,9 +10,26 @@ class Util {
         }
 
         if (!(name instanceof Type)){
-            throw Error('injected name type mismatch! only string or Type are supported')
+            throw new Error('injected name type mismatch! only string or Type are supported')
         }
         return name;
+    }
+
+    static isConstructor(x){
+        try{
+            return !!(new (new Proxy(x,handler))())
+        }catch(e){
+            return false
+        }
+    }
+
+    static validateConstructor(constructor){
+        if(!constructor){
+            throw new Error('constructor cannot be undefined!')
+        }
+        if(!Util.isConstructor(constructor)){
+            throw new Error('not a constructor')
+        }
     }
 }
 

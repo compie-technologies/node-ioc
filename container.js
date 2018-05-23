@@ -25,7 +25,7 @@ class Container {
 
     get(type) {
         if (!type){
-            throw Error('type cannot be undefined!')
+            throw new Error('type cannot be undefined!')
         }
         type = Util.validateType(type);
         const currentContext = new Context('currentContext');
@@ -40,13 +40,13 @@ class Container {
 
     _get(type, globalContext, currentContext) {
         if (!type){
-            throw Error('type cannot be undefined!')
+            throw new Error('type cannot be undefined!')
         }
         const stringName = type.stringName;
         let bindableTypeMap = this._getBindableTypeMap();
         let bindableType = bindableTypeMap[stringName];
         if (!bindableType){
-            //TODO: throw an error...
+            throw new Error('bindableType cannot be undefined!')
         }
         return this._getInstance(bindableType, globalContext, currentContext)
     }
@@ -83,7 +83,7 @@ class Container {
         // initialize - get instance
         const instance = bindableType._generateInstance('config');
         if (!instance) {
-            throw Error('error generating instance!')
+            throw new Error('error generating instance!');
         }
 
         //store the value into current context
