@@ -7,6 +7,7 @@
   "scripts": {
     "start": "node index.js"
   },
+  "main": "index",
   "dependencies": {
     "weak": "1.0.1"
   },
