@@ -1,11 +1,12 @@
 {
-  "name": "node_ioc",
+  "name": "node-ioc",
   "version": "0.1.0",
   "author": "Ariel Zadok. <ariel@compie.co.il> ",
   "description": "Simple ioc container for managing dependency injection in nodejs",
   "private": false,
-  "scripts": {
-    "start": "node index.js"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ariel-compie/node-ioc.git"
   },
   "main": "index",
   "dependencies": {
