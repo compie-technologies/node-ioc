@@ -1,0 +1,17 @@
+{
+  "name": "node_ioc",
+  "version": "0.1.0",
+  "author": "Ariel Zadok. <ariel@compie.co.il> ",
+  "description": "Simple ioc container for managing dependency injection in nodejs",
+  "private": false,
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "weak": "1.0.1"
+  },
+  "license": "BSD2",
+  "engines": {
+    "node": ">=0.8"
+  }
+}
