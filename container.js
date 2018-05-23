@@ -18,7 +18,7 @@ class Container {
         type = Util.validateType(type);
         const containerRef = weak(this, () => {
             // `this` inside the callback is the EventEmitter.
-            console.debug('"containerRef" has been garbage collected!')
+            // console.debug('"containerRef" has been garbage collected!')
         });
         return new BindableType(type, containerRef);
     }
@@ -95,7 +95,7 @@ class Container {
         //inject dependencies...
         const containerRef = weak(this, () => {
             // `this` inside the callback is the EventEmitter.
-            console.debug('"containerRef" has been garbage collected!')
+            // console.debug('"containerRef" has been garbage collected!')
         });
         new DependencyInjector(instance, containerRef).inject(globalContext, currentContext);
         return instance;

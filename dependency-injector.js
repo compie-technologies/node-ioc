@@ -17,7 +17,7 @@ class DependencyInjector {
                 const injectable = propValue;
                 const type = injectable.type;
                 const dependency = this.container._get(type, globalContext, currentContext);
-                console.debug('dependency: ',dependency);
+                // console.debug('dependency: ',dependency);
                 this.instance[key] = dependency;
             }
         }
