@@ -55,7 +55,8 @@ container.bind(TYPES.USER_SERVICE).to(UserService);
 container.bind(TYPES.AUTH_SERVICE).toSingleton(AuthService);
 container.bind(TYPES.CONFIG).toConstantValue(config);
 container.bind(TYPES.TEST_SERVICE).toProvider((context) => {
-    return () => {
+    return (args) => {
+        console.log(args);
         return new Promise((resolve) => {
             let userService = context.container.get(TYPES.USER_SERVICE);
             resolve(userService);
@@ -68,7 +69,7 @@ const userService1 = container.get(TYPES.USER_SERVICE);
 const userService2 = container.get(TYPES.USER_SERVICE);
 const userService3 = container.get(TYPES.USER_SERVICE);
 const testServiceProvider = container.get(TYPES.TEST_SERVICE);
-testServiceProvider.then((userService)=>{
+testServiceProvider("hello").then((userService)=>{
     console.log(userService);
 });
 

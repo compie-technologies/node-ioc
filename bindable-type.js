@@ -61,8 +61,7 @@ class BindableType {
             case InitializationType.VALUE:
                 return this.constantValue;
             case InitializationType.PROVIDER:
-                const response = this.provider(options);
-                return response();
+                return this.provider(options);
             default:
                 throw new Error('no matching initialization type found!')
         }
