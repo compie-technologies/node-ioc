@@ -1,6 +1,7 @@
 const Type = require('./type');
+const weak = require('weak');
 
-const handler={construct(){return handler}}
+const handler={construct(){return handler}};
 
 class Util {
 
@@ -30,6 +31,13 @@ class Util {
         if(!Util.isConstructor(constructor)){
             throw new Error('not a constructor')
         }
+    }
+
+    static generateWeakRef(ref){
+        return weak(ref, () => {
+            // `this` inside the callback is the EventEmitter.
+            // console.debug('"containerRef" has been garbage collected!')
+        });
     }
 }
 

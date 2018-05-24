@@ -1,4 +1,3 @@
-const weak = require('weak');
 const Context = require('./context');
 const DependencyInjector = require('./dependency-injector');
 const Util = require('./util');
@@ -16,10 +15,7 @@ class Container {
             throw Error('type cannot be undefined!')
         }
         type = Util.validateType(type);
-        const containerRef = weak(this, () => {
-            // `this` inside the callback is the EventEmitter.
-            // console.debug('"containerRef" has been garbage collected!')
-        });
+        const containerRef = Util.generateWeakRef(this);
         return new BindableType(type, containerRef);
     }
 
@@ -81,7 +77,9 @@ class Container {
 
         //**initialization stage**//
         // initialize - get instance
-        const instance = bindableType._generateInstance('config');
+
+        const containerRef = Util.generateWeakRef(this);
+        const instance = bindableType._generateInstance({container: containerRef});
         if (!instance) {
             throw new Error('error generating instance!');
         }
@@ -93,10 +91,6 @@ class Container {
             globalContext._insertValue(type,instance);
         }
         //inject dependencies...
-        const containerRef = weak(this, () => {
-            // `this` inside the callback is the EventEmitter.
-            // console.debug('"containerRef" has been garbage collected!')
-        });
         new DependencyInjector(instance, containerRef).inject(globalContext, currentContext);
         return instance;
     }

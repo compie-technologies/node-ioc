@@ -1,17 +1,19 @@
 const Util = require('./util');
 
 const InitializationType = Object.freeze({
-    VALUE:   Symbol("value"),
-    VOLATILE:  Symbol("volatile"),
+    VALUE: Symbol("value"),
+    PROVIDER: Symbol("provider"),
+    VOLATILE: Symbol("volatile"),
     SINGLETON: Symbol("singleton")
 });
 
 class BindableType {
 
 
-    constructor(type, container){
+    constructor(type, container) {
         this.container = container;
         this.type = type;
+        this._generateInstance = this._generateInstance.bind(this);
     }
 
     to(constructor) {
@@ -28,8 +30,17 @@ class BindableType {
         this.container._bindType(this);
     }
 
+    toProvider(provider) {
+        if (!provider) {
+            throw new Error('provider cannot be undefined!')
+        }
+        this.provider = provider;
+        this.initializationType = InitializationType.PROVIDER;
+        this.container._bindType(this);
+    }
+
     toConstantValue(constantValue) {
-        if(!constantValue){
+        if (!constantValue) {
             throw new Error('constantValue cannot be undefined!')
         }
         this.constantValue = constantValue;
@@ -38,17 +49,20 @@ class BindableType {
     }
 
 
-    _generateInstance(options){
-        if (!this.initializationType){
+    _generateInstance(options) {
+        if (!this.initializationType) {
             //TODO: throw error...
         }
         switch (this.initializationType) {
             case InitializationType.VOLATILE:
-                return new this.constructor(options);
+                return new this.constructor();
             case InitializationType.SINGLETON:
-                return new this.constructor(options);
+                return new this.constructor();
             case InitializationType.VALUE:
                 return this.constantValue;
+            case InitializationType.PROVIDER:
+                const response = this.provider(options);
+                return response();
             default:
                 throw new Error('no matching initialization type found!')
         }
