@@ -10,6 +10,11 @@ class Container {
         this.lazyInject = this.lazyInject.bind(this);
     }
 
+    /**
+     * @public
+     * @param {String | Type} type
+     * @returns {BindableType}
+     */
     bind(type) {
         if (!type){
             throw Error('type cannot be undefined!')
@@ -19,6 +24,11 @@ class Container {
         return new BindableType(type, containerRef);
     }
 
+    /**
+     * @public
+     * @param {String | Type} type
+     * @returns {Object}
+     */
     get(type) {
         if (!type){
             throw new Error('type cannot be undefined!')
@@ -30,10 +40,22 @@ class Container {
         return value;
     }
 
+    /**
+     * @public
+     * @param {String | Type} type
+     * @returns {Object}
+     */
     lazyInject(type) {
         return this.get(type);
     }
 
+    /**
+     * @package
+     * @param {String | Type} type
+     * @param {Context} globalContext
+     * @param {Context} currentContext
+     * @returns {Object}
+     */
     _get(type, globalContext, currentContext) {
         if (!type){
             throw new Error('type cannot be undefined!')
@@ -47,6 +69,10 @@ class Container {
         return this._getInstance(bindableType, globalContext, currentContext)
     }
 
+    /**
+     * @package
+     * @param {BindableType} bindableType
+     */
     _bindType(bindableType){
         const type = bindableType.type;
         const stringName = type.stringName;
@@ -54,6 +80,10 @@ class Container {
         bindableTypeMap[stringName] = bindableType;
     }
 
+    /**
+     * @package
+     * @return {Object}
+     */
     _getBindableTypeMap() {
         let bindableTypeMap = this.bindableTypeMap;
         if (!bindableTypeMap) {
@@ -62,6 +92,13 @@ class Container {
         return bindableTypeMap;
     }
 
+    /**
+     * @package
+     * @param {BindableType} bindableType
+     * @param {Context} globalContext
+     * @param {Context} currentContext
+     * @return {Object}
+     */
     _getInstance(bindableType, globalContext, currentContext){
         const type = bindableType.type;
         //check current context for value

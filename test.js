@@ -65,6 +65,7 @@ container.bind(TYPES.TEST_SERVICE).toProvider((context) => {
 
 });
 
+
 const userService1 = container.get(TYPES.USER_SERVICE);
 const userService2 = container.get(TYPES.USER_SERVICE);
 const userService3 = container.get(TYPES.USER_SERVICE);

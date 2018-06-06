@@ -10,12 +10,21 @@ const InitializationType = Object.freeze({
 class BindableType {
 
 
+    /**
+     * @package
+     * @param {Type} type
+     * @param {Container} container
+     */
     constructor(type, container) {
         this.container = container;
         this.type = type;
         this._generateInstance = this._generateInstance.bind(this);
     }
 
+    /**
+     * @public
+     * @param {constructor} constructor
+     */
     to(constructor) {
         Util.validateConstructor(constructor);
         this.constructor = constructor;
@@ -23,6 +32,10 @@ class BindableType {
         this.container._bindType(this);
     }
 
+    /**
+     * @public
+     * @param {constructor} constructor
+     */
     toSingleton(constructor) {
         Util.validateConstructor(constructor);
         this.constructor = constructor;
@@ -30,6 +43,24 @@ class BindableType {
         this.container._bindType(this);
     }
 
+    /** Description of the provider function
+     @name ProviderFunction
+     @function
+     @param {...*} args
+     @return {Promise}
+     */
+
+    /** Description of the provider
+     @callback Provider
+     @param {Object} context
+     @return ProviderFunction
+     */
+
+
+    /**
+     * @public
+     * @param {Provider} provider
+     */
     toProvider(provider) {
         if (!provider) {
             throw new Error('provider cannot be undefined!')
@@ -39,6 +70,10 @@ class BindableType {
         this.container._bindType(this);
     }
 
+    /**
+     * @public
+     * @param {Object} constantValue
+     */
     toConstantValue(constantValue) {
         if (!constantValue) {
             throw new Error('constantValue cannot be undefined!')
@@ -49,6 +84,10 @@ class BindableType {
     }
 
 
+    /**
+     * @package
+     * @param {Object} options
+     */
     _generateInstance(options) {
         if (!this.initializationType) {
             //TODO: throw error...
