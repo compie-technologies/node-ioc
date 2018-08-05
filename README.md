@@ -6,7 +6,7 @@ Nodej-ioc is an inversion of control (IoC) container for JavaScript apps.
 
 An IoC container uses a class constructor to identify and inject its dependencies.
 
-Nodej-ioc allows JavaScript developers to write code that adheres to the SOLID principles.
+Nodejs-ioc allows JavaScript developers to write code that adheres to the SOLID principles.
 
 
 ## Installation
