@@ -1,6 +1,6 @@
 {
   "name": "nodejs-ioc",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "author": "Ariel Zadok. <ariel@compie.co.il> ",
   "description": "Simple ioc container for managing dependency injection in nodejs",
   "private": false,
