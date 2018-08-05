@@ -2,7 +2,7 @@ class Context {
 
     /**
      * @package
-     * @param {String} name
+     * @param {String} [name]
      */
     constructor(name) {
         this.contextName = name || 'globalContext';

@@ -16,6 +16,7 @@ class BindableType {
      * @param {Container} container
      */
     constructor(type, container) {
+        //TODO: make private propertire...
         this.container = container;
         this.type = type;
         this._generateInstance = this._generateInstance.bind(this);
@@ -85,7 +86,7 @@ class BindableType {
 
 
     /**
-     * @package
+     * @private
      * @param {Object} options
      */
     _generateInstance(options) {
