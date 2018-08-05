@@ -2,7 +2,7 @@
 
 ## About
 
-Nodej-ioc is an inversion of control (IoC) container for JavaScript apps.
+Nodejs-ioc is an inversion of control (IoC) container for JavaScript apps.
 
 An IoC container uses a class constructor to identify and inject its dependencies.
 
@@ -25,7 +25,7 @@ Let’s take a look at the basic usage and APIs of Nodejs-ioc with JavaScript:
 
 ### Step 1: Declare your types
 ```js
-const {Type} = require("node-ioc");
+const {Type} = require("nodejs-ioc");
 
 const TYPES = {
     AUTH_SERVICE : Type.for('AUTH_SERVICE'),
@@ -41,7 +41,7 @@ const TYPES = {
 
 ### Step 2: Create and configure a Container
 ```js
-const {Container, inject} = require("node-ioc");
+const {Container, inject} = require("nodejs-ioc");
 
 class UserService {
 }
