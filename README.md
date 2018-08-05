@@ -3,7 +3,9 @@
 ## About
 
 Nodej-ioc is an inversion of control (IoC) container for JavaScript apps.
+
 An IoC container uses a class constructor to identify and inject its dependencies.
+
 Nodej-ioc allows JavaScript developers to write code that adheres to the SOLID principles.
 
 
@@ -62,7 +64,7 @@ module.exports = { container }
 
 ```
 
-### bind
+### bind options
 Binds to a singleton class
 ```js
 container.bind(TYPES.AUTH_SERVICE).toSingleton(AuthService);
@@ -87,13 +89,14 @@ As we can see the `config` was successfully resolved and injected into `AuthServ
 ### inject
 There are two important things to remember when using `inject`:
 - It must be used inside a constructor
-- The requested dependencies will be injected after the class instance is created — i.e., not inside the constructor.
-For catching the dependencies injection we can use `onDependenciesInjected` method
+- The requested dependencies will be injected after the class instance is created — i.e., not inside the constructor (the `inject` keyword only marks the class members as flags and doesn't injects the dependency immediately).
+For catching the dependencies' injection we can use `onDependenciesInjected` method
 
 ```js
 class AuthService {
     constructor(){
         this.config = inject(TYPES.CONFIG);
+        //config is not injected yet
         console.log('AuthService generated');
     }
 
@@ -130,7 +133,12 @@ testServiceProvider("hello").then((userService)=>{
 
 ## Lazy inject
 
-Using `lazyInject` doesn't delay the injection of the dependencies, all dependencies are injected when the class instance is created.
+Using `lazyInject` allows the container to inject dependencies into objects that are not bound to it.
+For example, when using a service in an Express middleware that exists inside a container.
+
+`lazyInject` works differently from the `inject` method provided above, since it injects the dependency immediately (uses the `get` method)
+
+`lazyInject` is linked to a specific container, hence needs to be exported after instantiating the container.
 
 ```js
 const lazyInject = container.lazyInject;
@@ -139,6 +147,7 @@ class HttpRequest{
 
     constructor(){
         this.authService = lazyInject(TYPES.AUTH_SERVICE);
+        //authService is now injected
         console.log('HttpRequest generated', this.authService)
     }
 }
