@@ -90,7 +90,8 @@ As we can see the `config` was successfully resolved and injected into `AuthServ
 There are two important things to remember when using `inject`:
 - It must be used inside a constructor
 - The requested dependencies will be injected after the class instance is created — i.e., not inside the constructor (the `inject` keyword only marks the class members as flags and doesn't injects the dependency immediately).
-\nFor catching the dependencies' injection we can use `onDependenciesInjected` method
+
+For catching the dependencies' injection we can use `onDependenciesInjected` method
 
 ```js
 class AuthService {
