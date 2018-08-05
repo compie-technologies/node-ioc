@@ -56,17 +56,22 @@ const config = {
 };
 
 const container = new Container();
-//binds to a class
 container.bind(TYPES.USER_SERVICE).to(UserService);
-//binds to a singleton class
-container.bind(TYPES.AUTH_SERVICE).toSingleton(AuthService);
-//binds to a constant value
-container.bind(TYPES.CONFIG).toConstantValue(config);
 
 module.exports = { container }
 
 ```
 
+### bind
+Binds to a singleton class
+```js
+container.bind(TYPES.AUTH_SERVICE).toSingleton(AuthService);
+```
+
+Binds to a constant value
+```js
+container.bind(TYPES.CONFIG).toConstantValue(config);
+```
 
 ### Step 3: Resolve dependencies
 You can use the method `get` from the `container` class to resolve a dependency.
