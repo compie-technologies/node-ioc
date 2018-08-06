@@ -1,7 +1,11 @@
 {
   "name": "nodejs-ioc",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "author": "Ariel Zadok. <ariel@compie.co.il> ",
+  "contributors": [
+    "Amit Landau <amit@compie.co.il>",
+    "Eden Toledano <eden@compie.co.il>"
+  ],
   "description": "Simple ioc container for managing dependency injection in nodejs",
   "private": false,
   "repository": {
@@ -9,10 +13,16 @@
     "url": "https://github.com/ariel-compie/node-ioc.git"
   },
   "main": "index",
+  "keywords": [
+    "nodejs-ioc",
+    "ioc",
+    "di",
+    "injection"
+  ],
   "dependencies": {
     "weak": "1.0.1"
   },
-  "license": "BSD2",
+  "license": "MIT",
   "engines": {
     "node": ">=0.8"
   }

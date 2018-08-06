@@ -1,7 +1,7 @@
-const Container = require('./container');
-const Type = require('./type');
-const Injectable = require('./injectable');
-const Util = require('./util');
+const Container = require('./lib/container');
+const Type = require('./lib/type');
+const Injectable = require('./lib/injectable');
+const Util = require('./lib/util');
 
 /**
  *
